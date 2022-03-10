@@ -68,5 +68,7 @@ data:
       labels:
         method: "$1"
         type: "$2"
+{{- if .Values.placement.enabled }}
   placement_uwsgi.ini: |
 {{ include (print .Template.BasePath "/etc/_placement_uwsgi.ini.tpl") . | indent 4 }}
+{{- end }}

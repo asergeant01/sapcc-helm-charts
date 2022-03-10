@@ -1,3 +1,4 @@
+{{- if .Values.placement.enabled }}
 kind: Deployment
 apiVersion: apps/v1
 
@@ -110,3 +111,4 @@ spec:
         - name: nova-etc
           configMap:
             name: nova-etc
+{{- end }}
