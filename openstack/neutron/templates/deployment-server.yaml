@@ -138,6 +138,16 @@ spec:
               name: neutron-etc
               subPath: logging.conf
               readOnly: true
+{{- if .Values.cc_fabric.agent.enabled }}
+            - mountPath: /etc/neutron/plugins/ml2/ml2_conf_cc-fabric.ini
+              name: neutron-etc-cc-fabric
+              subPath: ml2_conf_cc-fabric.ini
+              readOnly: true
+            - mountPath: /etc/neutron/plugins/ml2/cc-fabric-driver-config.yaml
+              name: neutron-etc-cc-fabric
+              subPath: cc-fabric-driver-config.yaml
+              readOnly: true
+{{- end }}
             - mountPath: /etc/neutron/plugins/ml2/ml2-conf.ini
               name: neutron-etc
               subPath: ml2-conf.ini
@@ -236,6 +246,11 @@ spec:
         - name: neutron-etc
           configMap:
             name: neutron-etc
+{{- if .Values.cc_fabric.agent.enabled }}
+        - name: neutron-etc-cc-fabric
+          configMap:
+            name: neutron-etc-cc-fabric
+{{- end }}
         - name: neutron-etc-vendor
           configMap:
             name: neutron-etc-vendor
